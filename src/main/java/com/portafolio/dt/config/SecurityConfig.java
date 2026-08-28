@@ -36,7 +36,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
-            "https://tu-frontend.vercel.app"
+            "https://portafolio-design-thinking-frontend.onrender.com"
         ));
 
         configuration.setAllowedMethods(List.of(
