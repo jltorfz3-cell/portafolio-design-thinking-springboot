@@ -1,0 +1,15 @@
+# Archivos de compilación (artefactos)
+/target/
+/build/
+*.jar
+*.war
+
+# Archivos de entorno local e IDEs
+.env
+.mvn/wrapper/maven-wrapper.jar
+.idea/
+*.iml
+.eclipse/
+.settings/
+.classpath
+.project
