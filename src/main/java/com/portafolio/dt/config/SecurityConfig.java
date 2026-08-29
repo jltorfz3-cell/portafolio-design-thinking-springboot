@@ -29,6 +29,7 @@ public class SecurityConfig {
     @Bean SecurityFilterChain filterChain(HttpSecurity h,JwtFilter j)throws Exception{
         h
         .csrf(c->c.disable())
+        .cors(c -> {})
         .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(a->a.requestMatchers("/api/auth/**","/swagger-ui/**","/swagger-ui.html","/api-docs/**")
         .permitAll()
