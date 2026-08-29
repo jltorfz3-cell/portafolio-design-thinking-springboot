@@ -1,10 +1,4 @@
 package com.portafolio.dt.config;
-
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-
 import com.portafolio.dt.security.JwtFilter; 
 import org.springframework.context.annotation.*; 
 import org.springframework.security.authentication.*; 
