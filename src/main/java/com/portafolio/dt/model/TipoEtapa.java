@@ -1,0 +1,1 @@
+package com.portafolio.dt.model; public enum TipoEtapa{EMPATIZAR,DEFINIR,IDEAR,PROTOTIPAR,PROBAR}

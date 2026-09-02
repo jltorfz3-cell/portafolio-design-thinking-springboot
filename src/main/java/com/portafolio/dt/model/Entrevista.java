@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="entrevistas") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Entrevista {  @Column(name="etapa_id") Long etapaId;  String entrevistado;  @Column(name="tipo_entrevistado") String tipoEntrevistado;  @Column(name="fecha_entrevista") LocalDate fechaEntrevista;  @Column(name="pregunta_principal") String preguntaPrincipal;  String respuestas;  String hallazgos;  @Column(name="creado_en") OffsetDateTime creadoEn; }

@@ -1,3 +1,51 @@
 package com.portafolio.dt.controller;
-import com.portafolio.dt.entity.Proyecto; import com.portafolio.dt.repository.ProyectoRepository; import org.springframework.http.*; import org.springframework.web.bind.annotation.*; import java.util.List;
-@RestController @RequestMapping("/api/proyectos") public class ProyectoController {private final ProyectoRepository repo;public ProyectoController(ProyectoRepository r){repo=r;}@GetMapping public List<Proyecto> listar(){return repo.findAll();}@GetMapping("/{id}") public ResponseEntity<Proyecto> obtener(@PathVariable Long id){return repo.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());}@GetMapping("/equipo/{equipoId}") public List<Proyecto> equipo(@PathVariable Long equipoId){return repo.findByEquipoId(equipoId);}@PostMapping public ResponseEntity<Proyecto> crear(@RequestBody Proyecto p){return ResponseEntity.status(HttpStatus.CREATED).body(repo.save(p));}@PutMapping("/{id}") public ResponseEntity<Proyecto> actualizar(@PathVariable Long id,@RequestBody Proyecto p){if(!repo.existsById(id))return ResponseEntity.notFound().build();p.setId(id);return ResponseEntity.ok(repo.save(p));}@DeleteMapping("/{id}") public ResponseEntity<Void> eliminar(@PathVariable Long id){if(!repo.existsById(id))return ResponseEntity.notFound().build();repo.deleteById(id);return ResponseEntity.noContent().build();}}
+
+import com.portafolio.dt.model.Proyecto;
+import com.portafolio.dt.repository.ProyectoRepository;
+import com.portafolio.dt.service.ProyectoService;
+import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+
+@RestController
+@RequestMapping("/api/proyectos")
+public class ProyectoController {
+    private final ProyectoRepository repo;
+    private final ProyectoService service;
+
+    public ProyectoController(ProyectoRepository repo, ProyectoService service) {
+        this.repo = repo;
+        this.service = service;
+    }
+
+    @GetMapping
+    public List<Proyecto> all() { return repo.findAll(); }
+
+    @GetMapping("/{id}")
+    public Proyecto one(@PathVariable Long id) {
+        return repo.findById(id).orElseThrow();
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','DOCENTE','COORDINADOR')")
+    public ResponseEntity<Proyecto> create(@RequestBody Proyecto x) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(x));
+    }
+
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','DOCENTE','COORDINADOR')")
+    public Proyecto update(@PathVariable Long id, @RequestBody Proyecto x) {
+        if (!repo.existsById(id)) throw new NoSuchElementException("No existe");
+        x.setId(id);
+        return repo.save(x);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','COORDINADOR')")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        if (!repo.existsById(id)) return ResponseEntity.notFound().build();
+        repo.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}

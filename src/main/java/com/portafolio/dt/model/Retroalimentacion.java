@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="retroalimentaciones") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Retroalimentacion {  @Column(name="prueba_id") Long pruebaId;  String participante;  String comentario;  @Column(name="aspecto_positivo") String aspectoPositivo;  @Column(name="aspecto_mejorar") String aspectoMejorar;  Short calificacion;  @Column(name="creado_en") OffsetDateTime creadoEn; }

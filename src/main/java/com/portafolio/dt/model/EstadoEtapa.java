@@ -1,0 +1,1 @@
+package com.portafolio.dt.model; public enum EstadoEtapa{PENDIENTE,EN_PROCESO,COMPLETADA}

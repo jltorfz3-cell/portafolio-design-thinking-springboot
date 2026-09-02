@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="evaluaciones") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Evaluacion {  @Column(name="proyecto_id") Long proyectoId;  @Column(name="etapa_id") Long etapaId;  @Column(name="docente_id") Long docenteId;  String criterio;  String descripcion;  BigDecimal puntaje;  @Column(name="puntaje_maximo") BigDecimal puntajeMaximo;  String observaciones;  @Column(name="creado_en") OffsetDateTime creadoEn; }

@@ -1,0 +1,1 @@
+package com.portafolio.dt.model; public enum EstadoProyecto{BORRADOR,EN_PROCESO,FINALIZADO,ARCHIVADO}

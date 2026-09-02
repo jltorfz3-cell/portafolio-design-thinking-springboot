@@ -1,3 +1,0 @@
-package com.portafolio.dt.security;
-import com.portafolio.dt.repository.UsuarioRepository; import org.springframework.security.core.userdetails.*; import org.springframework.stereotype.Service;
-@Service public class CustomUserDetailsService implements UserDetailsService { private final UsuarioRepository repo; public CustomUserDetailsService(UsuarioRepository repo){this.repo=repo;} public UserDetails loadUserByUsername(String username){var u=repo.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Usuario no encontrado"));return User.withUsername(u.getUsername()).password(u.getPasswordHash()).roles("USER").disabled(!u.isActivo()).build();} }

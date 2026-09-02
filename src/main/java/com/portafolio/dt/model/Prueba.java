@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="pruebas") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Prueba {  @Column(name="etapa_id") Long etapaId;  @Column(name="prototipo_id") Long prototipoId;  String nombre;  String objetivo;  String procedimiento;  @Column(name="fecha_prueba") LocalDate fechaPrueba;  @Column(name="numero_participantes") Integer numeroParticipantes;  String resultados;  String conclusiones;  @Column(name="creado_en") OffsetDateTime creadoEn; }

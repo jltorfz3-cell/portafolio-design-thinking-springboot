@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="auditoria") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Auditoria {  @Column(name="usuario_id") Long usuarioId;  String accion;  String entidad;  @Column(name="entidad_id") Long entidadId;  String ip;  String descripcion;  @Column(name="creado_en") OffsetDateTime creadoEn; }

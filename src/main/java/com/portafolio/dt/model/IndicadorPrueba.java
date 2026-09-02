@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="indicadores_prueba") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class IndicadorPrueba {  @Column(name="prueba_id") Long pruebaId;  String nombre;  String unidad;  @Column(name="valor_antes") BigDecimal valorAntes;  @Column(name="valor_despues") BigDecimal valorDespues;  String observaciones; }

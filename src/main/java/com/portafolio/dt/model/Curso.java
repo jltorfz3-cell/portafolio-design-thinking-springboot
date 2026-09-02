@@ -1,0 +1,4 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="cursos") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Curso {
+@Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id; @Column(name="institucion_id",nullable=false) Long institucionId; @Column(name="docente_id") Long docenteId; @Column(nullable=false) String nombre; @Column(nullable=false) String grado; String grupo; @Column(name="anio_escolar",nullable=false) Short anioEscolar; @Column(nullable=false) Boolean activo=true; @Column(name="creado_en") OffsetDateTime creadoEn; }

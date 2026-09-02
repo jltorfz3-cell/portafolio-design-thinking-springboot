@@ -1,0 +1,1 @@
+package com.portafolio.dt.model; public enum TipoPregunta{TEXTO,NUMERO,SI_NO,OPCION_UNICA,MULTIPLE,ESCALA}

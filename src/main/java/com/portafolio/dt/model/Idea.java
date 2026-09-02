@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="ideas") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Idea {  @Column(name="etapa_id") Long etapaId;  String titulo;  String descripcion;  Short impacto;  Short facilidad;  Short costo;  Short creatividad;  Boolean seleccionada;  @Column(name="creada_por") Long creadaPor;  @Column(name="creado_en") OffsetDateTime creadoEn; }

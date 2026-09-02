@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="encuesta_respuestas") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class EncuestaRespuesta {  @Column(name="pregunta_id") Long preguntaId;  @Column(name="estudiante_id") Long estudianteId;  String respuesta;  @Column(name="creado_en") OffsetDateTime creadoEn; }

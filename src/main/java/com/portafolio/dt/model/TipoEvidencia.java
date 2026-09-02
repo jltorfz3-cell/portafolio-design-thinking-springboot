@@ -1,0 +1,1 @@
+package com.portafolio.dt.model; public enum TipoEvidencia{IMAGEN,VIDEO,DOCUMENTO,AUDIO,ENLACE,OTRO}

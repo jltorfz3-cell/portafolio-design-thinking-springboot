@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="observaciones") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Observacion {  @Column(name="etapa_id") Long etapaId;  String lugar;  @Column(name="fecha_observacion") LocalDate fechaObservacion;  @Column(name="hora_inicio") LocalTime horaInicio;  @Column(name="hora_fin") LocalTime horaFin;  String observador;  String descripcion;  @Column(name="situaciones_detectadas") String situacionesDetectadas;  @Column(name="necesidades_observadas") String necesidadesObservadas;  @Column(name="creado_en") OffsetDateTime creadoEn; }

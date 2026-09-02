@@ -1,0 +1,5 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="usuarios") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Usuario {
+@Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id; @Column(nullable=false,unique=true) String username; @Column(nullable=false,unique=true) String email; @Column(name="password_hash",nullable=false) String passwordHash; @Column(nullable=false) String nombres; @Column(nullable=false) String apellidos; @Column(nullable=false) Boolean activo=true; @Column(name="ultimo_acceso") OffsetDateTime ultimoAcceso; @Column(name="creado_en") OffsetDateTime creadoEn; @Column(name="actualizado_en") OffsetDateTime actualizadoEn;
+@ManyToMany(fetch=FetchType.EAGER) @JoinTable(name="usuario_roles",joinColumns=@JoinColumn(name="usuario_id"),inverseJoinColumns=@JoinColumn(name="rol_id")) java.util.Set<Rol> roles=new java.util.HashSet<>(); }

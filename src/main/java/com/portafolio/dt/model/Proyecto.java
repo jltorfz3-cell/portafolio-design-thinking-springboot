@@ -1,0 +1,4 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="proyectos") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Proyecto {
+@Id @GeneratedValue(strategy=GenerationType.IDENTITY) Long id; @Column(name="equipo_id",nullable=false) Long equipoId; @Column(nullable=false) String titulo; String descripcion; @Column(name="problema_inicial") String problemaInicial; @Column(name="reto_diseno") String retoDiseno; @Enumerated(EnumType.STRING) @Column(nullable=false,columnDefinition="estado_proyecto") EstadoProyecto estado=EstadoProyecto.BORRADOR; @Column(name="fecha_inicio") LocalDate fechaInicio; @Column(name="fecha_fin") LocalDate fechaFin; @Column(nullable=false) Short progreso=0; @Column(name="creado_en") OffsetDateTime creadoEn; @Column(name="actualizado_en") OffsetDateTime actualizadoEn; }

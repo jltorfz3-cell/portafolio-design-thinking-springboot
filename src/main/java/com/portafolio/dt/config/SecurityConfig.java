@@ -1,69 +1,48 @@
 package com.portafolio.dt.config;
-import com.portafolio.dt.security.JwtFilter; 
-import org.springframework.context.annotation.*; 
-import org.springframework.security.authentication.*; 
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration; 
-import org.springframework.security.config.annotation.web.builders.HttpSecurity; 
-import org.springframework.security.config.http.SessionCreationPolicy; 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; 
-import org.springframework.security.crypto.password.PasswordEncoder; 
-import org.springframework.security.web.*; 
+
+import com.portafolio.dt.security.JwtFilter;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.*;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.*;
+import java.util.*;
 
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+@Configuration
+@EnableMethodSecurity
+public class SecurityConfig {
+    @Value("${app.cors.origins}") String origins;
 
-import java.util.List;
-
-@Configuration 
-public class SecurityConfig { 
-    @Bean PasswordEncoder 
-    passwordEncoder(){
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    } 
-    @Bean AuthenticationManager 
-    authenticationManager(AuthenticationConfiguration c)throws Exception{
-        return c.getAuthenticationManager();
-    } 
-    @Bean SecurityFilterChain filterChain(HttpSecurity h,JwtFilter j)throws Exception{
-        h
-        .csrf(c->c.disable())
-        .cors(c -> {})
-        .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(a->a.requestMatchers("/api/auth/**","/swagger-ui/**","/swagger-ui.html","/api-docs/**")
-        .permitAll()
-        .anyRequest()
-        .authenticated())
-        .addFilterBefore(j,UsernamePasswordAuthenticationFilter.class);
-        return h.build();
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration c = new CorsConfiguration();
+        c.setAllowedOrigins(Arrays.stream(origins.split(",")).map(String::trim).toList());
+        c.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
+        c.setAllowedHeaders(List.of("*"));
+        c.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource s = new UrlBasedCorsConfigurationSource();
+        s.registerCorsConfiguration("/**", c);
+        return s;
+    }
 
-        CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOrigins(List.of(
-            "https://portafolio-design-thinking-frontend.onrender.com"
-        ));
-
-        configuration.setAllowedMethods(List.of(
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE",
-            "OPTIONS"
-        ));
-
-        configuration.setAllowedHeaders(List.of("*"));
-
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source =
-            new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration("/**", configuration);
-
-        return source;
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity h, JwtFilter j) throws Exception {
+        h.csrf(x -> x.disable())
+         .cors(x -> {})
+         .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+         .authorizeHttpRequests(a -> a
+             .requestMatchers("/api/auth/**","/swagger-ui/**","/swagger-ui.html","/api-docs/**").permitAll()
+             .anyRequest().authenticated())
+         .addFilterBefore(j, UsernamePasswordAuthenticationFilter.class);
+        return h.build();
     }
 }

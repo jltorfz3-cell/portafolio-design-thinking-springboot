@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="encuesta_preguntas") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class EncuestaPregunta {  @Column(name="encuesta_id") Long encuestaId;  String pregunta;  @Enumerated(EnumType.STRING) @Column(name="tipo",columnDefinition="tipo_pregunta") TipoPregunta tipo;  Short orden; }

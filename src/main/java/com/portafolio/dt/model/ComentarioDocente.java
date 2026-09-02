@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="comentarios_docente") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class ComentarioDocente {  @Column(name="proyecto_id") Long proyectoId;  @Column(name="etapa_id") Long etapaId;  @Column(name="docente_id") Long docenteId;  String comentario;  @Column(name="creado_en") OffsetDateTime creadoEn;  @Column(name="actualizado_en") OffsetDateTime actualizadoEn; }

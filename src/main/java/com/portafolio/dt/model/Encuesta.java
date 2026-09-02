@@ -1,0 +1,3 @@
+package com.portafolio.dt.model;
+import jakarta.persistence.*; import lombok.*; import java.time.*; import java.math.BigDecimal;
+@Entity @Table(name="encuestas") @Getter @Setter @NoArgsConstructor @AllArgsConstructor public class Encuesta {  @Column(name="etapa_id") Long etapaId;  String titulo;  String descripcion;  @Column(name="numero_participantes") Integer numeroParticipantes;  @Column(name="resultado_principal") String resultadoPrincipal;  @Column(name="fecha_inicio") LocalDate fechaInicio;  @Column(name="fecha_fin") LocalDate fechaFin;  @Column(name="creado_en") OffsetDateTime creadoEn; }
